@@ -1,14 +1,12 @@
 package desafio_spring.socialmeli.services;
 
-import desafio_spring.socialmeli.dto.RelationshipDTO;
-import desafio_spring.socialmeli.dto.UserDTO;
-import desafio_spring.socialmeli.dto.UserFollowersCountDTO;
-import desafio_spring.socialmeli.dto.UserRequestDTO;
+import desafio_spring.socialmeli.dto.*;
 import desafio_spring.socialmeli.repositories.RelationshipRepository;
 import desafio_spring.socialmeli.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -40,14 +38,40 @@ public class UserService {
 
     public UserFollowersCountDTO getUserFollowersCount(String userId) {
         UserDTO user = this.userRepository.getUserById(userId);
-        List<RelationshipDTO> relationships = this.relationshipRepository.getRelationshipsByFollowedId(userId);
+        List<RelationshipDTO> followers = this.relationshipRepository.getRelationshipsByFollowedId(userId);
 
         UserFollowersCountDTO userFollowersCount = new UserFollowersCountDTO();
         userFollowersCount.setUserId(userId);
         userFollowersCount.setUserName(user.getUserName());
-        userFollowersCount.setFollowersCount(relationships.size());
+        userFollowersCount.setFollowersCount(followers.size());
 
         return userFollowersCount;
+    }
+
+    public UserRelationshipsDTO getUserFollowers(String userId) {
+        UserDTO user = this.userRepository.getUserById(userId);
+        List<RelationshipDTO> relationships = this.relationshipRepository.getRelationshipsByFollowedId(userId);
+        List<UserDTO> followers = this.userRepository.getUsersByListOfId(relationships.stream().map(RelationshipDTO::getFollowerId).collect(Collectors.toList()));
+
+        UserRelationshipsDTO userFollowers = new UserRelationshipsDTO();
+        userFollowers.setUserId(userId);
+        userFollowers.setUserName(user.getUserName());
+        userFollowers.setFollowers(followers);
+
+        return userFollowers;
+    }
+
+    public UserRelationshipsDTO getUserFollows(String userId) {
+        UserDTO user = this.userRepository.getUserById(userId);
+        List<RelationshipDTO> relationships = this.relationshipRepository.getRelationshipsByFollowerId(userId);
+        List<UserDTO> follows = this.userRepository.getUsersByListOfId(relationships.stream().map(RelationshipDTO::getFollowedId).collect(Collectors.toList()));
+
+        UserRelationshipsDTO userFollows = new UserRelationshipsDTO();
+        userFollows.setUserId(userId);
+        userFollows.setUserName(user.getUserName());
+        userFollows.setFollowers(follows);
+
+        return userFollows;
     }
 
 

@@ -38,9 +38,9 @@ public class RelationshipRepository {
 
     public List<RelationshipDTO> getRelationshipsByFollowedId (String userId) {
         List<RelationshipDTO> relationships = loadDatabase()
-                .stream()
-                .filter(RelationshipDTO -> RelationshipDTO.getFollowedId().equals(userId))
-                .collect(Collectors.toList());
+                                                .stream()
+                                                .filter(RelationshipDTO -> RelationshipDTO.getFollowedId().equals(userId))
+                                                .collect(Collectors.toList());
 
         return relationships;
     }

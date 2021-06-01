@@ -1,10 +1,7 @@
 package desafio_spring.socialmeli.controllers;
 
 
-import desafio_spring.socialmeli.dto.RelationshipDTO;
-import desafio_spring.socialmeli.dto.UserDTO;
-import desafio_spring.socialmeli.dto.UserFollowersCountDTO;
-import desafio_spring.socialmeli.dto.UserRequestDTO;
+import desafio_spring.socialmeli.dto.*;
 import desafio_spring.socialmeli.services.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +15,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/create")
-    public UserDTO createUser(@RequestBody UserRequestDTO user) {
+    @PostMapping("/newuser")
+    public UserDTO newUser(@RequestBody UserRequestDTO user) {
         return this.userService.insertUser(user);
     }
 
@@ -32,5 +29,17 @@ public class UserController {
     public UserFollowersCountDTO userFollowersCount(@PathVariable String userId) {
         return this.userService.getUserFollowersCount(userId);
     }
+
+    @GetMapping("{userId}/followers/list")
+    public UserRelationshipsDTO userFollowers(@PathVariable String userId) {
+        return this.userService.getUserFollowers(userId);
+    }
+
+    @GetMapping("{userId}/followed/list")
+    public UserRelationshipsDTO userFollows(@PathVariable String userId) {
+        return this.userService.getUserFollows(userId);
+    }
+
+
 
 }

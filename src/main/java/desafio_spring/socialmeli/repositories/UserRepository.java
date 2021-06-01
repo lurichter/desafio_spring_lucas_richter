@@ -2,7 +2,6 @@ package desafio_spring.socialmeli.repositories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import desafio_spring.socialmeli.dto.RelationshipDTO;
 import desafio_spring.socialmeli.dto.UserDTO;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.ResourceUtils;
@@ -12,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository {
@@ -30,9 +30,17 @@ public class UserRepository {
         List<UserDTO> users = loadDatabase();
         UserDTO user = null;
         if (users != null) {
-            user = users.stream().filter(UserDTO -> UserDTO.getUserID().equals(userId)).findFirst().orElse(null);
+            user = users.stream().filter(UserDTO -> UserDTO.getUserId().equals(userId)).findFirst().orElse(null);
         }
         return user;
+    }
+
+    public List<UserDTO> getUsersByListOfId(List<String> userIds) {
+        List<UserDTO> users = loadDatabase();
+        if (users != null) {
+            return users.stream().filter(e -> userIds.contains(e.getUserId())).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
     }
 
     public void updateDatabase(List<UserDTO> database) {

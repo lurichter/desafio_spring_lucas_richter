@@ -1,18 +1,20 @@
 package desafio_spring.socialmeli.dto;
 
-public class UserDTO {
+import java.util.List;
+
+public class UserRelationshipsDTO {
 
     private String userId;
     private String userName;
-    private Boolean isSeller;
+    private List<UserDTO> followers;
 
-    public UserDTO() {
+    public UserRelationshipsDTO() {
     }
 
-    public UserDTO(String userId, String userName, Boolean isSeller) {
+    public UserRelationshipsDTO(String userId, String userName, List<UserDTO> followers) {
         this.userId = userId;
         this.userName = userName;
-        this.isSeller = isSeller;
+        this.followers = followers;
     }
 
     public String getUserId() {
@@ -31,11 +33,11 @@ public class UserDTO {
         this.userName = userName;
     }
 
-    public Boolean getSeller() {
-        return isSeller;
+    public List<UserDTO> getFollowers() {
+        return followers;
     }
 
-    public void setSeller(Boolean seller) {
-        isSeller = seller;
+    public void setFollowers(List<UserDTO> followers) {
+        this.followers = followers;
     }
 }
