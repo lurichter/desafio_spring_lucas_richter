@@ -36,6 +36,18 @@ public class UserService {
         return relationship;
     }
 
+    public RelationshipDTO unfollowUser(String userId, String userIdToUnfollow) {
+        List<RelationshipDTO> relationships = this.relationshipRepository.getDatabase();
+        RelationshipDTO relationship = relationships.stream()
+                                                    .filter(r -> r.getFollowerId().equals(userId)
+                                                            & r.getFollowedId().equals(userIdToUnfollow))
+                                                    .findFirst()
+                                                    .orElse(null);
+        relationships.remove(relationship);
+        this.relationshipRepository.updateDatabase(relationships);
+        return relationship;
+    }
+
     public UserFollowersCountDTO getUserFollowersCount(String userId) {
         UserDTO user = this.userRepository.getUserById(userId);
         List<RelationshipDTO> followers = this.relationshipRepository.getRelationshipsByFollowedId(userId);

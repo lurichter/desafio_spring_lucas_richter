@@ -25,6 +25,11 @@ public class UserController {
         return this.userService.followUser(userId, userIdToFollow);
     }
 
+    @PostMapping("/{userId}/unfollow/{userIdToUnfollow}")
+    public RelationshipDTO unfollowUser(@PathVariable String userId, @PathVariable String userIdToUnfollow) {
+        return this.userService.unfollowUser(userId, userIdToUnfollow);
+    }
+
     @GetMapping("{userId}/followers/count")
     public UserFollowersCountDTO userFollowersCount(@PathVariable String userId) {
         return this.userService.getUserFollowersCount(userId);
@@ -39,7 +44,5 @@ public class UserController {
     public UserRelationshipsDTO userFollows(@PathVariable String userId) {
         return this.userService.getUserFollows(userId);
     }
-
-
 
 }
