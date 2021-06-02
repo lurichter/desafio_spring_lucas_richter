@@ -3,12 +3,12 @@ package desafio_spring.socialmeli.dto;
 public class UserRequestDTO {
 
     private String userName;
-    private Boolean isSeller;
+    private boolean isSeller;
 
     public UserRequestDTO() {
     }
 
-    public UserRequestDTO(String userName, Boolean isSeller) {
+    public UserRequestDTO(String userName, boolean isSeller) {
         this.userName = userName;
         this.isSeller = isSeller;
     }
@@ -21,11 +21,11 @@ public class UserRequestDTO {
         this.userName = userName;
     }
 
-    public Boolean getSeller() {
+    public boolean getSeller() {
         return isSeller;
     }
 
-    public void setSeller(Boolean seller) {
-        isSeller = seller;
+    public void setSeller(boolean seller) {
+        this.isSeller = seller;
     }
 }

@@ -1,6 +1,5 @@
 package desafio_spring.socialmeli.dto;
 
-import java.util.Calendar;
 import java.util.List;
 
 public class PostRequestDTO {
@@ -51,4 +50,5 @@ public class PostRequestDTO {
     public void setPrice(double price) {
         this.price = price;
     }
+
 }

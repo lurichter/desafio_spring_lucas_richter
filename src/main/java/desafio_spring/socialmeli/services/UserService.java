@@ -1,10 +1,13 @@
 package desafio_spring.socialmeli.services;
 
 import desafio_spring.socialmeli.dto.*;
+import desafio_spring.socialmeli.exceptions.InvalidUserFollowException;
+import desafio_spring.socialmeli.exceptions.UserNotFoundException;
 import desafio_spring.socialmeli.repositories.RelationshipRepository;
 import desafio_spring.socialmeli.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -60,10 +63,18 @@ public class UserService {
         return userFollowersCount;
     }
 
-    public UserRelationshipsDTO getUserFollowers(String userId) {
+    public UserRelationshipsDTO getUserFollowers(String userId, String order) {
         UserDTO user = this.userRepository.getUserById(userId);
         List<RelationshipDTO> relationships = this.relationshipRepository.getRelationshipsByFollowedId(userId);
         List<UserDTO> followers = this.userRepository.getUsersByListOfId(relationships.stream().map(RelationshipDTO::getFollowerId).collect(Collectors.toList()));
+
+        if (order != null) {
+            if (order.equals("name_asc")) {
+                followers.sort(Comparator.comparing(UserDTO::getUserName));
+            } else if (order.equals("name_desc")) {
+                followers.sort(Comparator.comparing(UserDTO::getUserName).reversed());
+            }
+        }
 
         UserRelationshipsDTO userFollowers = new UserRelationshipsDTO();
         userFollowers.setUserId(userId);
@@ -73,10 +84,18 @@ public class UserService {
         return userFollowers;
     }
 
-    public UserRelationshipsDTO getUserFollows(String userId) {
+    public UserRelationshipsDTO getUserFollows(String userId, String order) {
         UserDTO user = this.userRepository.getUserById(userId);
         List<RelationshipDTO> relationships = this.relationshipRepository.getRelationshipsByFollowerId(userId);
         List<UserDTO> follows = this.userRepository.getUsersByListOfId(relationships.stream().map(RelationshipDTO::getFollowedId).collect(Collectors.toList()));
+
+        if (order != null) {
+            if (order.equals("name_asc")) {
+                follows.sort(Comparator.comparing(UserDTO::getUserName));
+            } else if (order.equals("name_desc")) {
+                follows.sort(Comparator.comparing(UserDTO::getUserName).reversed());
+            }
+        }
 
         UserRelationshipsDTO userFollows = new UserRelationshipsDTO();
         userFollows.setUserId(userId);
@@ -86,5 +105,28 @@ public class UserService {
         return userFollows;
     }
 
+    public boolean validUser (String userId) {
+        if (this.userRepository.getUserById(userId) == null) {
+            return false;
+        } else {
+            return true;}
+    }
 
+    public boolean sellerUser (String userId) {
+        return this.userRepository.getUserById(userId).isSeller();
+    }
+
+    public boolean validRelationship (String followerId, String followedId) {
+        List<RelationshipDTO> relationships = this.relationshipRepository.getRelationshipsByFollowerId(followerId);
+        RelationshipDTO relationship = relationships.stream()
+                                                    .filter(RelationshipDTO -> RelationshipDTO.getFollowedId()
+                                                                                                .equals(followedId))
+                                                    .findFirst()
+                                                    .orElse(null);
+        if (relationship != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

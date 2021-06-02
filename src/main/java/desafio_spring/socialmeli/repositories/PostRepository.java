@@ -28,6 +28,14 @@ public class PostRepository {
         return database;
     }
 
+    public List<PostDTO> getPostsByUserId(String userId) {
+        List<PostDTO> posts = loadDatabase();
+        if (posts != null) {
+            return posts.stream().filter(PostDTO -> PostDTO.getUserId().equals(userId)).collect(Collectors.toList());
+        }
+        return new ArrayList<>();
+    }
+
     public List<PostDTO> getPostsByListOfUserId(List<String> userIds) {
         List<PostDTO> posts = loadDatabase();
         if (posts != null) {

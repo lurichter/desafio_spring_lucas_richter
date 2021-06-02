@@ -1,26 +1,21 @@
 package desafio_spring.socialmeli.dto;
 
-import java.util.Calendar;
 import java.util.List;
 
-public class PostDTO {
+public class PromoPostRequestDTO {
 
     private String userId;
-    private String postId;
-    private Calendar postDate;
     private List<ProductDTO> detail;
     private String category;
     private double price;
     private boolean hasPromo;
     private double discount;
 
-    public PostDTO() {
+    public PromoPostRequestDTO() {
     }
 
-    public PostDTO(String userId, String postId, Calendar postDate, List<ProductDTO> detail, String category, double price, boolean hasPromo, double discount) {
+    public PromoPostRequestDTO(String userId, List<ProductDTO> detail, String category, double price, boolean hasPromo, double discount) {
         this.userId = userId;
-        this.postId = postId;
-        this.postDate = postDate;
         this.detail = detail;
         this.category = category;
         this.price = price;
@@ -34,22 +29,6 @@ public class PostDTO {
 
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-
-    public String getPostId() {
-        return postId;
-    }
-
-    public void setPostId(String postId) {
-        this.postId = postId;
-    }
-
-    public Calendar getPostDate() {
-        return postDate;
-    }
-
-    public void setPostDate(Calendar postDate) {
-        this.postDate = postDate;
     }
 
     public List<ProductDTO> getDetail() {

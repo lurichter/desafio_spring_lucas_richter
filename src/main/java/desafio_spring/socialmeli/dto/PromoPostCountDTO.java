@@ -1,18 +1,18 @@
 package desafio_spring.socialmeli.dto;
 
-public class UserDTO {
+public class PromoPostCountDTO {
 
     private String userId;
     private String userName;
-    private boolean seller;
+    private Integer promoProductsCount;
 
-    public UserDTO() {
+    public PromoPostCountDTO() {
     }
 
-    public UserDTO(String userId, String userName, boolean seller) {
+    public PromoPostCountDTO(String userId, String userName, Integer promoProductsCounts) {
         this.userId = userId;
         this.userName = userName;
-        this.seller = seller;
+        this.promoProductsCount = promoProductsCounts;
     }
 
     public String getUserId() {
@@ -31,11 +31,11 @@ public class UserDTO {
         this.userName = userName;
     }
 
-    public boolean isSeller() {
-        return seller;
+    public Integer getPromoProductsCount() {
+        return promoProductsCount;
     }
 
-    public void setSeller(boolean seller) {
-        this.seller = seller;
+    public void setPromoProductsCount(Integer promoProductsCount) {
+        this.promoProductsCount = promoProductsCount;
     }
 }
