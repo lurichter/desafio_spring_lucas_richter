@@ -5,11 +5,11 @@
 
 ### 1. Criação de Usuários
 
-###endpoint
+### endpoint
 ```
 POST: localhost:8080/users/newuser
 ```
-###request body
+### request body
 ```
 {
     "userName":"Usuário 1",
@@ -41,7 +41,7 @@ POST: localhost:8080/users/newuser
 }
 ```
 
-###2. Requisitos Funcionais
+### 2. Requisitos Funcionais
 
 [US 0001 - Seguir vendedor](doc/us0001.md)
 
