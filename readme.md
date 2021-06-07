@@ -12,39 +12,36 @@ POST: localhost:8080/users/newuser
 #### request body
 ```
 {
-    "userId": "1",
-    "userName": "Usuário 1",
-    "isSeller": "false"
+    "userName":"Usuário 1",
+    "seller":false
 }
 ```
 ```
 {
-    "userId": "2",
-    "userName": "Usuário 2",
-    "isSeller": false
+    "userName":"Usuário 2",
+    "seller":false
 }
 ```
 ```
 {
-    "userId": "3",
-    "userName": "Vendedor 1",
-    "isSeller": true
+    "userName":"Vendedor 1",
+    "seller":true
 }
 ```
 ```
 {
-    "userId": "4",
-    "userName": "Vendedor 2",
-    "isSeller": true
+    "userName":"Vendedor 2",
+    "seller":true
 }
 ```
 ```
 {
-    "userId": "5",
-    "userName": "Vendedor 3",
-    "isSeller": true
+    "userName":"Vendedor 3",
+    "seller":true
 }
 ```
+
+###2. Requisitos Funcionais
 
 [US 0001 - Seguir vendedor](doc/us0001.md)
 

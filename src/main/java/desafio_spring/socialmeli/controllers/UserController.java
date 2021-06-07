@@ -39,7 +39,7 @@ public class UserController {
         if (userService.validRelationship(userId, userIdToFollow)) {
             throw new InvalidUserFollowException("User id " + userId + " already follow user " + userIdToFollow + ".");
         }
-        if (userService.sellerUser(userIdToFollow)) {
+        if (!userService.sellerUser(userIdToFollow)) {
             throw new InvalidUserFollowException("User id " + userIdToFollow + " is not a seller.");
         }
         return this.userService.followUser(userId, userIdToFollow);

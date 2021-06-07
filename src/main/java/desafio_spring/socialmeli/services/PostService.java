@@ -119,4 +119,19 @@ public class PostService {
         return userPromoPosts;
     }
 
+    public boolean validDiscount(PromoPostRequestDTO post) {
+        boolean promo = post.isHasPromo();
+        double discount = post.getDiscount();
+
+        if (discount < 0.0 && discount > 100.0) {
+            return false;
+        }
+        else if (discount > 0.0 && !promo) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
 }
