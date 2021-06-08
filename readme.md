@@ -1,9 +1,11 @@
-# Desafio Spring BootCamp Meli
+# Desafio Spring Bootcamp Meli
 ## Instruções para testes de todos os endpoints
 
-### As etapas devem ser executadas em sequência
+### As requisições foram disponibilizadas em uma collection do Postman que pode ser acessada através do link:
+[Collection Postman - Clique aqui](https://www.postman.com/collections/09998e1913e0cceca41f)
 
-### 1. Criação de Usuários
+### Abaixo seguem exemplos com as execuções das requisições em sequência
+### 1. Criação de Usuários - Realizar requisições abaixo antes de iniciar os requisitos funcionais
 
 ### endpoint
 ```
